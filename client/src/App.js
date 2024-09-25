@@ -11,7 +11,7 @@ import store from "./app/store";
 import Employeeinfo from "./Pages/Employeeinfo/Employeeinfo"
 import Home from "./Pages/home/home"
 import './App.css'
-
+import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
 // // Lazy loading components
 // const Login = Loadable(lazy(() => import("./Pages/Login/login")));
 // const Employeeinfo = Loadable(lazy(() => import("./Pages/Employeeinfo/Employeeinfo")));
@@ -77,6 +77,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/employeeinfo" element={<Employeeinfo />} />
+            <Route path="/sidenavi" element={<SideNavigation />} />
+
           </Routes>
         </Router>
       </div>

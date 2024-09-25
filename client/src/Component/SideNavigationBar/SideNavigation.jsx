@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { styled, useMediaQuery, useTheme, Grid } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
-// import CPOEImage from "../../assets/CPOE.svg";
+import employee from "../../assests/employee.svg";
 // import CalImage from "../../assets/Cal.svg";
 // import ConsultImage from "../../assets/Consult.svg";
 // import HistoryImage from "../../assets/History.svg";
@@ -64,7 +64,7 @@ const SideNavigation = () => {
 
   const navigationItems = [
     // { image: MedicaLogoImage },
-    // { name: "Consult", image: ConsultImage, path: "consultation" },
+    { name: "Employee Info", image: employee, path: "employeeinfo" },
     // { name: "History", image: HistoryImage, path: "history" },
     // { name: "Reports", image: prescription, path: "ReportsV2" },
     // { name: "CPOE", image: CPOEImage, path: "CPOE" },
