@@ -126,12 +126,12 @@ function Employeeinfo() {
             </table>
           </Box>
           <Box
-           sx={{
-            overflow: "auto",
-            width: "100%",
-            display: "flex",
-            justifyContent: "center",
-          }}
+            sx={{
+              overflow: "auto",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+            }}
           >
             <TablePagination
               sx={{ width: "100%" }}
