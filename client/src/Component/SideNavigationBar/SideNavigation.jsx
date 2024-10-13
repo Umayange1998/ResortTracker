@@ -4,11 +4,13 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { styled, useMediaQuery, useTheme, Grid } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
-import employee from "../../assests/employee.svg";
+import employee from "../../assests/employeew.svg";
+import units from "../../assests/units.svg";
+
 // import CalImage from "../../assets/Cal.svg";
 // import ConsultImage from "../../assets/Consult.svg";
 // import HistoryImage from "../../assets/History.svg";
-// import MedicaLogoImage from "../../assets/MedicaLogo.svg";
+import ResortTrackerLogo from "../../assests/logo-no-background.svg";
 // import prescription from "../../assets/prescription.svg";
 
 function removePart(originalString, partToRemove) {
@@ -63,9 +65,9 @@ const SideNavigation = () => {
   }, [location.pathname]); // Add location.pathname to the dependency array
 
   const navigationItems = [
-    // { image: MedicaLogoImage },
-    { name: "Employee Info", image: employee, path: "employeeinfo" },
-    // { name: "History", image: HistoryImage, path: "history" },
+    { image: ResortTrackerLogo },
+    { name: "Employee Info", image: employee, path: "Login" },
+    { name: "Units", image: units, path: "history" },
     // { name: "Reports", image: prescription, path: "ReportsV2" },
     // { name: "CPOE", image: CPOEImage, path: "CPOE" },
     // { name: "Calculators", image: CalImage, path: "Calculators" },
@@ -118,7 +120,7 @@ const SideNavigation = () => {
                   alignItems: "center",
                 }}
               >
-                <img src={item.image} width={30} alt={item.name} />
+                <img src={item.image} width={60} alt={item.name} />
                 <Typography fontWeight={"bold"} fontSize={10}>
                   {item.name}
                 </Typography>

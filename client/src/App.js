@@ -10,9 +10,10 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import Employeeinfo from "./Pages/Employeeinfo/Employeeinfo"
 import Home from "./Pages/home/home"
+import Login from "./Pages/Login/login"
 import './App.css'
 import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
-// // Lazy loading components
+// Lazy loading components
 // const Login = Loadable(lazy(() => import("./Pages/Login/login")));
 // const Employeeinfo = Loadable(lazy(() => import("./Pages/Employeeinfo/Employeeinfo")));
 // Add any additional pages here similarly as needed
@@ -22,21 +23,21 @@ import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
 //     path: "/",
 //     element: <Login />,
 //   },
-//   {
-//     path: "/",
-//     element: (
-//       <ProtectedRoute>
-//         <Layout />
-//       </ProtectedRoute>
-//     ),
-//     children: [
-//       {
-//         path: "employeeinfo",
-//         element: <Employeeinfo/>,
-//       },
-//       // Add any additional routes here
-//     ],
-//   },
+  // {
+  //   path: "/",
+  //   element: (
+  //     <ProtectedRoute>
+  //       <Layout />
+  //     </ProtectedRoute>
+  //   ),
+  //   children: [
+  //     {
+  //       path: "employeeinfo",
+  //       element: <Employeeinfo/>,
+  //     },
+  //     // Add any additional routes here
+  //   ],
+  // },
 // ]);
 
 
@@ -78,6 +79,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/employeeinfo" element={<Employeeinfo />} />
             <Route path="/sidenavi" element={<SideNavigation />} />
+            <Route path="/login" element={<Login />} />
+
 
           </Routes>
         </Router>
