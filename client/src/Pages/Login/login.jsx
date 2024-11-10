@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Grid,
+  Link,
   styled,
   TextField,
   Typography,
@@ -12,6 +13,7 @@ import { setIsAuth } from "../../reducers/isAuthSlise";
 import { useDispatch } from "react-redux";
 import BG from "../../assests/BGnew.png";
 import Logopng from "../../assests/logo-no-background.png";
+import FlexContainer from "../../Component/FlexContainer/FlexContainer";
 // import { Input as BaseInput } from '@mui/base/Input';
 
 const MainDiv = styled("div")({
@@ -27,6 +29,25 @@ const MainDiv = styled("div")({
   backgroundPosition: "top-left",
 });
 
+const LoginDiv = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.up("xs")]: {
+    width: "300px",
+  },
+  [theme.breakpoints.up("sm")]: {
+    width: "300px",
+  },
+  [theme.breakpoints.up("md")]: {
+    width: "350px",
+  },
+  [theme.breakpoints.up("lg")]: {
+    width: "350px",
+  },
+  borderRadius: "20px",
+  backgroundColor: "white",
+  padding: "20px",
+}));
+
+
 function Login() {
   // const dispatch = useDispatch();
   // const navigate = useNavigate();
@@ -35,96 +56,81 @@ function Login() {
   //   navigate('/employeeinfo');  };
   return (
     <MainDiv>
-      {/* <Button onClick={handleLogin}>Login</Button> */}
-      <Grid container>
-        <Grid item xs={12}>
-          <Box></Box>
-        </Grid>
-        <Grid item xs={2.4}></Grid>
-        <Grid item xs={2.4}></Grid>
-        <Grid
-          item
-          xs={2.4}
-          className="login"
+      <LoginDiv>
+      <Typography
+          textAlign={"center"}
+          color={"black"}
+          fontSize={"22px"}
+          fontWeight={600}
+        >
+          Login
+        </Typography>
+        <FlexContainer
           sx={{
-            backgroundColor: "white",
-            borderRadius: 4.5,
-            width: "100%",
-            minHeight: {
-              md: "450px",
-            },
-            // maxHeight: {
-            //   xs: "500px",
-            //   md: "300px",
-            // },
+            justifyContent: "center",
+            mt: 2,
           }}
         >
-          <Box
-            sx={{
-              width: "100%",
-              height: "70px",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex-end",
-              pb: 1,
-            }}
-          >
-            <Typography fontSize={25} fontWeight={"Bold"}>
-              Login
-            </Typography>
-          </Box>
-          <Box
-            className="logo"
-            sx={{
-              backgroundImage: `url(${Logopng})`,
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              width: "100%",
-              height: "90px",
-              display: "flex",
-              justifyContent: "center",
-              mb: 3,
-            }}
-          ></Box>
-          <Box
-            sx={{
-              p: 1,
-            }}
-          >
+          <img src={Logopng} alt="logo" width={"180px"} />
+        </FlexContainer>
+        <form>
+        <Box mt={3}>
             <TextField
-              id="outlined-basic"
               label="Username"
+              // error={!!errors.username}
+              fullWidth
               variant="outlined"
-              InputProps={{
-                sx: {
-                  height: "30px", // Set the new height of the TextField
-                  alignItems: "center", // Ensure the input text is centered
-                },
-              }}
-              InputLabelProps={{
-                sx: {
-                  top: "-4px", // Adjust this value based on the height of the field
-                  // transform: "translateY(10px)", // Shift the label to vertically center
-                  fontSize: "12px", // Optionally, reduce the label font size for a better fit
-                },
-              }}
+              // {...register("username", { required: true })}
+              size="small"
             />
           </Box>
-          <Box>
+          <Box mt={2}>
             <TextField
-              id="outlined-basic"
               label="Password"
+              fullWidth
               variant="outlined"
+              type="password"
+              // error={!!errors.password}
+              // {...register("password", { required: true })}
+              size="small"
             />
+            {/* <div
+              style={{ marginTop: "16px", color: "red", textAlign: "center" }}
+            >
+              {errors.password || errors.username ? (
+                <>
+                  <p>*All Fields Must Be Filled!</p>
+                </>
+              ) : (
+                <>{errorMsg}</>
+              )}
+            </div> */}
           </Box>
-          <Box></Box>
-          <Box></Box>
-          <Box></Box>
-        </Grid>
-        <Grid item sm={2.4}></Grid>
-        <Grid item sm={2.4}></Grid>
-      </Grid>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            fullWidth
+            sx={{
+              borderRadius: 5,
+              mt: 2,
+              mb: 2,
+            }}
+            onClick={""}
+          >
+            Login
+          </Button>
+        </form>
+        <Link
+            onClick={() => {
+              console.log("clicked");
+              // setShowModal(true);
+            }}
+            style={{ cursor: 'pointer' }}
+          >
+            Forgot Password?
+          </Link>
+      </LoginDiv>
     </MainDiv>
   );
 }

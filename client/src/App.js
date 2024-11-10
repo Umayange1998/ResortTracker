@@ -1,76 +1,24 @@
-import { lazy, useEffect, useState } from "react";
+import React,{ lazy, useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, RouterProvider, createBrowserRouter } from "react-router-dom";
 import { createTheme } from '@mui/material/styles';
-import Loadable from "./Component/Loadable/Loadable";
+import Loadable from "@loadable/component"
 import LoadingAnimation from "./Component/LoadingAnimation/LoadingAnimation";
 import SystemAlerts from "./Component/SystemAlerts/SystemAlerts";
 import Layout from "./Component/Layout/layout"
 import ProtectedRoute from "./Component/ProtectedRoute/ProtectedRoute";
 import { Provider } from "react-redux";
 import store from "./app/store";
-import Employeeinfo from "./Pages/Employeeinfo/Employeeinfo"
 import Home from "./Pages/home/home"
-import Login from "./Pages/Login/login"
+// import Login from "./Pages/Login/login"
 import './App.css'
 import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
-// Lazy loading components
-// const Login = Loadable(lazy(() => import("./Pages/Login/login")));
-// const Employeeinfo = Loadable(lazy(() => import("./Pages/Employeeinfo/Employeeinfo")));
-// Add any additional pages here similarly as needed
+import Loading from "./Component/Loading/Loading";
+import loadable from "@loadable/component";
+const Employeeinfo = loadable(() => import("./Pages/Employeeinfo/Employeeinfo"), {
+  fallback: <Loading />,
+});
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <Login />,
-//   },
-  // {
-  //   path: "/",
-  //   element: (
-  //     <ProtectedRoute>
-  //       <Layout />
-  //     </ProtectedRoute>
-  //   ),
-  //   children: [
-  //     {
-  //       path: "employeeinfo",
-  //       element: <Employeeinfo/>,
-  //     },
-  //     // Add any additional routes here
-  //   ],
-  // },
-// ]);
-
-
-// const App = () => {
-
-
-  
-//   useEffect(() => {
-//     const handleMessage = (event) => {
-//       if (event.data === "SavedAndPrinted" || event.data === "Printed") {
-//         console.log("Printed prescription");
-//       }
-//     };
-  
-//     window.addEventListener("message", handleMessage);
-//     return () => {
-//       window.removeEventListener("message", handleMessage);
-//     };
-//   }, []);
-  
-//   console.log(store);
-//   return (
-//     <Provider store={store}>
-//             <ThemeProvider>
-
-//         <LoadingAnimation />
-//         <SystemAlerts />
-//         <RouterProvider router={router} />
-//         </ThemeProvider>
-
-//     </Provider>
-//   );
-// };
+const Login = React.lazy(() => import("./Pages/Login/login"));
 function App() {
   return (
       <div className="App">
@@ -79,7 +27,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/employeeinfo" element={<Employeeinfo />} />
             <Route path="/sidenavi" element={<SideNavigation />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<React.Suspense fallback={<Loading />}><Login /></React.Suspense>} />
 
 
           </Routes>
