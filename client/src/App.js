@@ -14,18 +14,23 @@ import './App.css'
 import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
 import Loading from "./Component/Loading/Loading";
 import loadable from "@loadable/component";
-const Employeeinfo = loadable(() => import("./Pages/Employeeinfo/Employeeinfo"), {
-  fallback: <Loading />,
-});
+// const Employeeinfo = loadable(() => import("./Pages/Employeeinfo/Employeeinfo"), {
+//   fallback: <Loading />,
+// });
 
 const Login = React.lazy(() => import("./Pages/Login/login"));
+const Employeeinfo = React.lazy(() => import("./Pages/Employeeinfo/Employeeinfo"));
+const Units = React.lazy(() => import("./Pages/Units/Unit"));
+
 function App() {
   return (
       <div className="App">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/employeeinfo" element={<Employeeinfo />} />
+            <Route path="/employeeinfo" element={<React.Suspense fallback={<Loading />}><Employeeinfo /></React.Suspense>} />
+            <Route path="/Units" element={<React.Suspense fallback={<Loading />}><Units /></React.Suspense>} />
+
             <Route path="/sidenavi" element={<SideNavigation />} />
             <Route path="/login" element={<React.Suspense fallback={<Loading />}><Login /></React.Suspense>} />
 

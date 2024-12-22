@@ -66,8 +66,8 @@ const SideNavigation = () => {
 
   const navigationItems = [
     { image: ResortTrackerLogo },
-    { name: "Employee Info", image: employee, path: "Login" },
-    { name: "Units", image: units, path: "history" },
+    { name: "Employee Info", image: employee, path: "/employeeinfo" },
+    { name: "Units", image: units, path: "/Units" },
     // { name: "Reports", image: prescription, path: "ReportsV2" },
     // { name: "CPOE", image: CPOEImage, path: "CPOE" },
     // { name: "Calculators", image: CalImage, path: "Calculators" },
