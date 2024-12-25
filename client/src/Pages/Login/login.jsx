@@ -107,16 +107,11 @@ function Login() {
             </div> */}
           </Box>
           <Button
-            variant="contained"
-            color="primary"
-            type="submit"
             fullWidth
-            sx={{
-              borderRadius: 5,
-              mt: 2,
-              mb: 2,
-            }}
-            onClick={""}
+            sx={{ mt: 2 }}
+            variant="contained"
+            type="submit"
+            color={"primary"}
           >
             Login
           </Button>
