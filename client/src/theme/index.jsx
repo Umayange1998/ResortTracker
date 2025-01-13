@@ -24,7 +24,7 @@ export default function ThemeProvider({ children }) {
   const themeOptions = useMemo(
     () => ({
       palette: isLight ? palette.light : palette.dark,
-      typography,
+      // typography,
       breakpoints,
       shape: { borderRadius: 8 },
       shadows: isLight ? shadows.light : shadows.dark,

@@ -52,7 +52,6 @@ const SideNavigation = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [urlLocation, setUrlLocation] = useState("");
-
   useEffect(() => {
     // Use location.pathname to get the current URL path
     const currentUrl = location.pathname;

@@ -7,6 +7,8 @@ import palette from "./theme/palette";
 import './App.css'
 import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
 import Loading from "./Component/Loading/Loading";
+import componentsOverride from './theme/Overides'
+import typography from "./theme/typography"
 import loadable from "@loadable/component";
 // const Employeeinfo = loadable(() => import("./Pages/Employeeinfo/Employeeinfo"), {
 //   fallback: <Loading />,
@@ -18,7 +20,10 @@ const Units = React.lazy(() => import("./Pages/Units/Unit"));
 
 const theme = createTheme({
   palette: palette.light,
+  typography,
+
 })
+  theme.components = componentsOverride(theme);
 
 function App() {
   return (
