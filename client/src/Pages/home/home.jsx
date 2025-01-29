@@ -1,10 +1,12 @@
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Typography } from '@mui/material';
 
 function Home() {
   return (
     <div>
-      kijkjkjkjkn
+      <Typography>
+          Table
+        </Typography>
     </div>
   );
 }

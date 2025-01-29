@@ -49,11 +49,13 @@ const LoginDiv = styled(Box)(({ theme }) => ({
 
 
 function Login() {
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const handleLogin=()=>{
-  //   dispatch(setIsAuth(true))
-  //   navigate('/employeeinfo');  };
+
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
+    e.preventDefault(); // Prevent form submission refresh
+    navigate("/employeeinfo"); // Navigate to the "/employeeinfo" page
+  };
   return (
     <MainDiv>
       <LoginDiv>
@@ -73,7 +75,7 @@ function Login() {
         >
           <img src={Logopng} alt="logo" width={"180px"} />
         </FlexContainer>
-        <form>
+        <form onSubmit={handleLogin}>
         <Box mt={3}>
             <TextField
               label="Username"
@@ -116,15 +118,22 @@ function Login() {
             Login
           </Button>
         </form>
+        <FlexContainer
+          sx={{
+            my: 1,
+            flexDirection: "column",
+            gap: 1,
+          }}
+        >
         <Link
             onClick={() => {
               console.log("clicked");
               // setShowModal(true);
             }}
-            style={{ cursor: 'pointer' }}
-          >
+            style={{ cursor: 'pointer', fontFamily: 'Arial', fontSize: '16px' }}          >
             Forgot Password?
           </Link>
+          </FlexContainer>
       </LoginDiv>
     </MainDiv>
   );

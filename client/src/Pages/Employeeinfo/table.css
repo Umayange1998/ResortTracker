@@ -1,0 +1,55 @@
+.empinfo{
+    height: 240px;
+    overflow-y: auto;
+  }
+  
+  .empinfo > table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #666;
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .empinfo > thead {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  
+  .empinfo > th {
+    color: #333;
+    font-weight: 600;
+    padding: 10px 10px;
+    text-align: left;
+    
+  }
+
+  .empinfo > table thead {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
+
+  .empinfo > table tbody tr:hover {
+    background-color: #e3ebff;
+    transition: background-color 0.9s ease;
+    cursor: pointer;
+  }
+
+  .empinfo .no-data:hover {
+    background-color:  white;
+    transition: none;
+    cursor: default;
+  }
+  
+  .empinfo > table td , .empinfo > table th {
+    padding: 10px 5px;
+    border-bottom: 1px solid #d6d6d6;
+    text-align: center;
+  }
+  
+  

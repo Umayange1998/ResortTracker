@@ -7,7 +7,7 @@ import { pxToRem, responsiveFontSizes } from "../utils/getFontValue";
 
 const typography = {
   fontFamily: [
-    '"Poppins"',
+    "Poppins",
     "Roboto",
     '"Helvetica Neue"',
     "Arial",

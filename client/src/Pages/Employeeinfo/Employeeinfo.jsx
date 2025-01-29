@@ -2,8 +2,10 @@ import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BG from "../../assests/BG.jpg";
-import { Box, Grid, TablePagination, styled } from "@mui/material";
+import "./table.css";
 
+
+import { Box, Grid, Paper, TableContainer, TablePagination,  Typography, styled } from "@mui/material";
 function createData(name, code, population, size) {
   const density = population / size;
   return { name, code, population, size, density };
@@ -23,6 +25,24 @@ const MainDiv = styled("div")({
 });
 
 function Employeeinfo() {
+  const rows = [
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+    createData('Eclair', 262, 16.0, 24, 6.0),
+    createData('Cupcake', 305, 3.7, 67, 4.3),
+    createData('Gingerbread', 356, 16.0, 49, 3.9),
+  ];
+  
   const [listofUsers, setlistofUsers] = useState([]);
 
   useEffect(() => {
@@ -47,7 +67,10 @@ function Employeeinfo() {
   return (
     <MainDiv>
       <Grid container>
-        <Grid item xs={0.5} sm={1.5} md={2.5} lg={3.5}></Grid>
+        
+        <Grid item xs={0.5} sm={1.5} md={2.5} lg={3.5}>
+      
+        </Grid>
         <Grid
           item
           xs={11}
@@ -60,10 +83,11 @@ function Employeeinfo() {
               xs: 2,
               md: 3,
             },
-            borderRadius: 2,
+            borderRadius: 4,
             width: "100%",
           }}
         >
+          
           <Box
             className="empinfo"
             sx={{
@@ -75,55 +99,46 @@ function Employeeinfo() {
               width: "100%",
             }}
           >
-            <table
-              aria-label="sticky table"
-              style={{ width: "100%", tableLayout: "fixed" }}
-            >
-              <thead>
-                <tr>
-                  <th style={{ textAlign: "center" }} width={60}>
-                    No
-                  </th>
-                  <th style={{ textAlign: "left" }} width={200}>
-                    Name
-                  </th>
+            <Typography
+                            fontWeight={"bold"}
+                            sx={{
+                                fontSize: {
+                                    xs: "18px",
+                                    md: "25px",
+                                },
+                            }}
+                            textAlign={"center"}
+                        >
+                      Employee 
 
-                  <th width={100}>User Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                {listofUsers
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((value, key) => {
-                    return (
-                      <tr key={key} onClick={() => handleempinfoClick(value)}>
-                        <td> {value?.id} </td>
-                        <td style={{ textAlign: "left" }}>
-                          {`${value?.title} ${value?.firstName} ${value?.lastName}`}{" "}
-                        </td>
-                        <td> {value?.email} </td>
-                      </tr>
-                      // <TableRow
-                      //   hover
-                      //   role="checkbox"
-                      //   tabIndex={-1}
-                      //   key={value.code}
-                      // >
-                      //   {columns.map((column) => {
-                      //     const value = row[column.id];
-                      //     return (
-                      //       <TableCell key={column.id} align={column.align}>
-                      //         {column.format && typeof value === "number"
-                      //           ? column.format(value)
-                      //           : value}
-                      //       </TableCell>
-                      //     );
-                      //   })}
-                      // </TableRow>
-                    );
-                  })}
-              </tbody>
-            </table>
+        </Typography>
+      <table sx={{ minWidth: 650 }} aria-label="simple table">
+        <thead>
+          <tr>
+            <th>Dessert (100g serving)</th>
+            <th align="right">Calories</th>
+            <th align="right">Fat&nbsp;(g)</th>
+            <th align="right">Carbs&nbsp;(g)</th>
+            <th align="right">Protein&nbsp;(g)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <td component="th" scope="row">
+                {row.name}
+              </td>
+              <td align="right">{row.calories}</td>
+              <td align="right">{row.fat}</td>
+              <td align="right">{row.carbs}</td>
+              <td align="right">{row.protein}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
           </Box>
           <Box
             sx={{
