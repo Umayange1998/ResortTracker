@@ -1,5 +1,5 @@
 .empinfo{
-    height: 240px;
+    height: 450px;
     overflow-y: auto;
   }
   
@@ -46,7 +46,12 @@
     cursor: default;
   }
   
-  .empinfo > table td , .empinfo > table th {
+  .empinfo > table td  {
+    padding: 10px 5px;
+    border-bottom: 1px solid #d6d6d6;
+    text-align: center;
+  }
+  .empinfo > table th {
     padding: 10px 5px;
     border-bottom: 1px solid #d6d6d6;
     text-align: center;
