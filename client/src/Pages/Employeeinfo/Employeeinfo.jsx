@@ -4,28 +4,19 @@ import { useEffect, useState } from "react";
 import BG from "../../assests/BG.jpg";
 import "./table.css";
 import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
+import { data } from "./Data";
+import AddEmployeeModal from "../../Component/AddEmployeeModal/AddEmployeeModal";
 import {
   Box,
-  Divider,
-  FormHelperText,
   Grid,
   IconButton,
-  Input,
   InputAdornment,
-  OutlinedInput,
-  Paper,
-  TableContainer,
-  TablePagination,
   TextField,
   Typography,
   styled,
 } from "@mui/material";
 import palette from "../../theme/palette";
-function createData(name, code, population, size) {
-  const density = population / size;
-  return { name, code, population, size, density };
-}
 
 const MainDiv = styled("div")({
   display: "flex",
@@ -41,25 +32,11 @@ const MainDiv = styled("div")({
 });
 
 function Employeeinfo() {
-  const rows = [
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-    createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-    createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-    createData("Eclair", 262, 16.0, 24, 6.0),
-    createData("Cupcake", 305, 3.7, 67, 4.3),
-    createData("Gingerbread", 356, 16.0, 49, 3.9),
-  ];
-
   const [listofUsers, setlistofUsers] = useState([]);
+  const [Search, setSearch] = useState("");
+  const [Openmodel, setOpenmodel] = useState(false);
+
+  console.log(Search);
 
   useEffect(() => {
     axios.get("http://localhost:3001/Users").then((response) => {
@@ -135,9 +112,7 @@ function Employeeinfo() {
                 color: "white",
               }}
               variant="contained"
-              onClick={() => {
-                // navigate("/");
-              }}
+              onClick={() => setOpenmodel(true)}
             >
               <AddIcon />
               Add Employee
@@ -157,32 +132,37 @@ function Employeeinfo() {
             <table sx={{ minWidth: 650 }} aria-label="simple table">
               <thead>
                 <tr>
-                  <th>Dessert (100g serving)</th>
-                  <th align="right">Calories</th>
-                  <th align="right">Fat&nbsp;(g)</th>
-                  <th align="right">Carbs&nbsp;(g)</th>
-                  <th align="right">Protein&nbsp;(g)</th>
+                  <th>NO</th>
+                  <th align="right">Name</th>
+                  <th align="right">User Name</th>
                 </tr>
               </thead>
               <tbody>
-                {rows.map((row) => (
-                  <tr
-                    key={row.name}
-                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                  >
-                    <td component="th" scope="row">
-                      {row.name}
-                    </td>
-                    <td align="right">{row.calories}</td>
-                    <td align="right">{row.fat}</td>
-                    <td align="right">{row.carbs}</td>
-                    <td align="right">{row.protein}</td>
-                  </tr>
-                ))}
+                {data
+                  .filter((item) => {
+                    return Search.toLowerCase() === ""
+                      ? item
+                      : item.first_name.toLowerCase().includes(Search) ||
+                          item.last_name.toLowerCase().includes(Search);
+                  })
+                  .map((item) => (
+                    <tr
+                      key={item.id}
+                      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <td component="th" scope="row">
+                        {item.id}
+                      </td>
+                      <td align="right">
+                        {item.first_name + " " + item.last_name}
+                      </td>
+                      <td align="right">{item.email}</td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </Box>
-          <Box 
+          <Box
             sx={{
               mt: 2,
               width: "100%",
@@ -203,6 +183,7 @@ function Employeeinfo() {
                   borderRadius: "12px", // Apply border radius to the input field
                 },
               }}
+              onChange={(e) => setSearch(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="end">
@@ -211,11 +192,13 @@ function Employeeinfo() {
                 ),
               }}
             />
-            
           </Box>
         </Grid>
         <Grid item sx></Grid>
       </Grid>
+      {Openmodel && (
+        <AddEmployeeModal Openmodel={Openmodel} setOpenmodel={setOpenmodel} />
+      )}
     </MainDiv>
   );
 }
