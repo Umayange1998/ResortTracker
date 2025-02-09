@@ -17,7 +17,7 @@ import loadable from "@loadable/component";
 const Login = React.lazy(() => import("./Pages/Login/login"));
 const Employeeinfo = React.lazy(() => import("./Pages/Employeeinfo/Employeeinfo"));
 const Units = React.lazy(() => import("./Pages/Units/Unit"));
-
+const Addnewemployee = React.lazy(()=>import("./Pages/AddNewEmployee/Addnewemployee"))
 const theme = createTheme({
   palette: palette.light,
   typography,
@@ -37,6 +37,8 @@ function App() {
 
             <Route path="/sidenavi" element={<SideNavigation />} />
             <Route path="/login" element={<React.Suspense fallback={<Loading />}><Login /></React.Suspense>} />
+            <Route path="/Addnewemployee" element={<React.Suspense fallback={<Loading />}><Addnewemployee /></React.Suspense>} />
+
 
 
           </Routes>
