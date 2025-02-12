@@ -35,6 +35,8 @@ function Employeeinfo() {
   const [listofUsers, setlistofUsers] = useState([]);
   const [Search, setSearch] = useState("");
   const [Openmodel, setOpenmodel] = useState(false);
+  const [selectedRowIndex, setSelectedRowIndex] = useState(0);
+
 
   console.log(Search);
 
@@ -145,18 +147,35 @@ function Employeeinfo() {
                       : item.first_name.toLowerCase().includes(Search) ||
                           item.last_name.toLowerCase().includes(Search);
                   })
-                  .map((item) => (
+                  .map((item, index) => (
                     <tr
                       key={item.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <td component="th" scope="row">
+                      <td component="th" scope="row"
+                      onClick={()=>{
+                        console.log("Raw")
+                        console.log(index)
+
+                      }}>
                         {item.id}
                       </td>
-                      <td align="right">
+                      <td align="right"
+                      onClick={()=>{
+                        console.log("Raw")
+                        console.log(index)
+
+                      }}>
                         {item.first_name + " " + item.last_name}
                       </td>
-                      <td align="right">{item.email}</td>
+                      <td align="right"
+                      onClick={()=>{
+                        console.log("Raw")
+                        console.log(index)
+
+                        setSelectedRowIndex(index);
+
+                      }}>{item.email}</td>
                     </tr>
                   ))}
               </tbody>

@@ -36,15 +36,21 @@ const AddEmployeeModal = ({ Openmodel, setOpenmodel }) => {
   const handlecloseButton = useCallback(() => {
     setOpenmodel(false);
   }, [setOpenmodel]);
-  const [designation, setDesignation] = React.useState("default");
+
+const handlesaveButton =useCallback(()=>{
+  setOpenmodel(false);
+}, [setOpenmodel]);
+
+
+const [designation, setDesignation] = React.useState("default");
 
   const handleChange = (event) => {
     setDesignation(event.target.value);
   };
   const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: true,
+    unit01: false,
+    unit02: false,
+    unit03: false,
   });
 
   const handleChangeSwitch = (event) => {
@@ -257,32 +263,32 @@ const AddEmployeeModal = ({ Openmodel, setOpenmodel }) => {
                   <FormControlLabel
                     control={
                       <Switch
-                        checked={state.gilad}
+                        checked={state.unit01}
                         onChange={handleChangeSwitch}
-                        name="gilad"
+                        name="unit01"
                       />
                     }
-                    label="Gilad Gray"
+                    label="Unit 01"
                   />
                   <FormControlLabel
                     control={
                       <Switch
-                        checked={state.jason}
+                        checked={state.unit02}
                         onChange={handleChangeSwitch}
-                        name="jason"
+                        name="unit02"
                       />
                     }
-                    label="Jason Killian"
+                    label="Unit 02 "
                   />
                   <FormControlLabel
                     control={
                       <Switch
-                        checked={state.antoine}
+                        checked={state.unit03}
                         onChange={handleChangeSwitch}
-                        name="antoine"
+                        name="unit03"
                       />
                     }
-                    label="Antoine Llorca"
+                    label="Unit 03 "
                   />
                 </FormGroup>
                 {/* <FormHelperText>Be careful</FormHelperText> */}
@@ -310,7 +316,7 @@ const AddEmployeeModal = ({ Openmodel, setOpenmodel }) => {
                 <Button
                   variant="contained"
                   color="primary"
-                  onClick={""}
+                  onClick={handlesaveButton}
                   sx={{
                     borderRadius: 1,
                   }}
