@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BG from "../../assests/BG.jpg";
@@ -7,6 +7,8 @@ import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import { data } from "./Data";
 import AddEmployeeModal from "../../Component/AddEmployeeModal/AddEmployeeModal";
+import Employeedetailmodal from "../../Component/Employeedetailmodal/Employeedetailmodal"
+import Editemployeemodal from "../../Component/Modal/EditEmplyeeModel/Editemployeemodal"
 import {
   Box,
   Grid,
@@ -36,7 +38,8 @@ function Employeeinfo() {
   const [Search, setSearch] = useState("");
   const [Openmodel, setOpenmodel] = useState(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState(0);
-
+  const [employeedetailmodelopen, setEmployeedetailmodelopen] = useState(false);
+  const [editemployeemodalopen, setEditemployeemodalopen] = useState(true)
 
   console.log(Search);
 
@@ -59,6 +62,10 @@ function Employeeinfo() {
   };
 
   const handleempinfoClick = () => {};
+  const handleclick = useCallback(() => {
+    setEmployeedetailmodelopen(true);
+    console.log("clicked");
+  });
   return (
     <MainDiv>
       <Grid container>
@@ -152,30 +159,41 @@ function Employeeinfo() {
                       key={item.id}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
-                      <td component="th" scope="row"
-                      onClick={()=>{
-                        console.log("Raw")
-                        console.log(index)
+                      <td
+                        component="th"
+                        scope="row"
+                        onClick={() => {
+                          console.log("Raw");
+                          console.log(index);
+                          handleclick();
 
-                      }}>
+                          
+                        }}
+                      >
                         {item.id}
                       </td>
-                      <td align="right"
-                      onClick={()=>{
-                        console.log("Raw")
-                        console.log(index)
+                      <td
+                        align="right"
+                        onClick={() => {
+                          console.log("Raw");
+                          console.log(index);
+                          handleclick();
 
-                      }}>
+                        }}
+                      >
                         {item.first_name + " " + item.last_name}
                       </td>
-                      <td align="right"
-                      onClick={()=>{
-                        console.log("Raw")
-                        console.log(index)
-
-                        setSelectedRowIndex(index);
-
-                      }}>{item.email}</td>
+                      <td
+                        align="right"
+                        onClick={() => {
+                          console.log("Raw");
+                          console.log(index);
+                          handleclick();
+                          setSelectedRowIndex(index);
+                        }}
+                      >
+                        {item.email}
+                      </td>
                     </tr>
                   ))}
               </tbody>
@@ -218,6 +236,9 @@ function Employeeinfo() {
       {Openmodel && (
         <AddEmployeeModal Openmodel={Openmodel} setOpenmodel={setOpenmodel} />
       )}
+      {employeedetailmodelopen &&(<Employeedetailmodal Openmodel={employeedetailmodelopen} setOpenmodel= {setEmployeedetailmodelopen} />)}
+
+      {editemployeemodalopen && (<Editemployeemodal  Openmodel={editemployeemodalopen} setOpenmodel= {setEditemployeemodalopen}/>)}
     </MainDiv>
   );
 }

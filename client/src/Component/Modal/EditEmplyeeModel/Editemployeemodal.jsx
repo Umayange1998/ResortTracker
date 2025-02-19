@@ -16,7 +16,7 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useCallback } from "react";
-import Flexcontainer from "../../Component/FlexContainer/FlexContainer";
+import Flexcontainer from "../../FlexContainer/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
@@ -31,18 +31,16 @@ const style = {
   borderRadius: 4,
   maxHeight: "100vh", // Set max height to 80% of the viewport height
 };
-
-const AddEmployeeModal = ({ Openmodel, setOpenmodel }) => {
+function Editemployeemodal({ Openmodel, setOpenmodel }) {
   const handlecloseButton = useCallback(() => {
     setOpenmodel(false);
   }, [setOpenmodel]);
 
-const handlesaveButton =useCallback(()=>{
-  setOpenmodel(false);
-}, [setOpenmodel]);
+  const handlesaveButton = useCallback(() => {
+    setOpenmodel(false);
+  }, [setOpenmodel]);
 
-
-const [designation, setDesignation] = React.useState("default");
+  const [designation, setDesignation] = React.useState("default");
 
   const handleChange = (event) => {
     setDesignation(event.target.value);
@@ -59,7 +57,6 @@ const [designation, setDesignation] = React.useState("default");
       [event.target.name]: event.target.checked,
     });
   };
-
   return (
     <Modal open={Openmodel} onClose={setOpenmodel}>
       <Box sx={style}>
@@ -88,7 +85,7 @@ const [designation, setDesignation] = React.useState("default");
               }}
               textAlign={"center"}
             >
-              Add New Employee
+              Edit Employee
             </Typography>
             <IconButton onClick={handlecloseButton}>
               <CloseIcon />
@@ -98,7 +95,7 @@ const [designation, setDesignation] = React.useState("default");
         <Box sx={{ overflowY: "auto", maxHeight: "80vh", padding: "0 8px" }}>
           <Grid container spacing={2} justifyContent={"space-between"}>
             <Grid item xs={12}>
-              <Typography > Name</Typography>
+              <Typography>Name</Typography>
 
               <Box
                 sx={{
@@ -110,7 +107,7 @@ const [designation, setDesignation] = React.useState("default");
                 {" "}
                 <TextField
                   id="First_Name"
-                  sx={{ width: "45%" }}
+                  sx={{ mt: 0.5, width: "45%" }}
                   size="small"
                   value={""}
                   placeholder="First Name"
@@ -122,7 +119,7 @@ const [designation, setDesignation] = React.useState("default");
                 />
                 {/* { <Typography color="error">* Required</Typography>} */}
                 <TextField
-                  sx={{  width: "45%" }}
+                  sx={{ mt: 0.5, width: "45%" }}
                   size="small"
                   value={""}
                   placeholder="Last Name"
@@ -138,6 +135,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={12}>
               <Typography>User Name</Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -153,6 +151,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={12}>
               <Typography>Password</Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -168,6 +167,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={12}>
               <Typography>Conform Password</Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -183,6 +183,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={5}>
               <Typography>ID </Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -198,6 +199,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={5}>
               <Typography>Phone </Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -213,6 +215,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={12}>
               <Typography>Address </Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -227,25 +230,26 @@ const [designation, setDesignation] = React.useState("default");
             </Grid>
             <Grid item xs={12}>
               <Typography>Designation </Typography>
-              <Box sx={{width:"50%"}}>
-
-              <FormControl sx={{ minWidth: 120 }} fullWidth>
-                <Select
-                  size="small"
-                  value={designation}
-                  variant="standard"
-                  label="Age"
-                  onChange={handleChange}
-                
-                >
-                  <MenuItem value="default" disabled selected>
-                    Select an option
-                  </MenuItem>
-                  <MenuItem value={1}>Admin</MenuItem>
-                  <MenuItem value={2}>Supervisor</MenuItem>
-                  <MenuItem value={3}>Operator</MenuItem>
-                </Select>
-              </FormControl>
+              <Box sx={{ width: "50%" }}>
+                <FormControl sx={{ minWidth: 120 }} fullWidth>
+                  <Select
+                    size="small"
+                    value={designation}
+                    variant="standard"
+                    label="Age"
+                    onChange={handleChange}
+                    sx={{
+                      mt: 0.5,
+                    }}
+                  >
+                    <MenuItem value="default" disabled selected>
+                      Select an option
+                    </MenuItem>
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>Supervisor</MenuItem>
+                    <MenuItem value={3}>Operator</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -322,6 +326,6 @@ const [designation, setDesignation] = React.useState("default");
       </Box>
     </Modal>
   );
-};
+}
 
-export default AddEmployeeModal;
+export default Editemployeemodal;

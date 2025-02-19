@@ -16,33 +16,31 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useCallback } from "react";
-import Flexcontainer from "../../Component/FlexContainer/FlexContainer";
-import CloseIcon from "@mui/icons-material/Close";
+import Flexcontainer from "../FlexContainer/FlexContainer";
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 
 const style = {
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: 300,
   bgcolor: "background.paper",
   boxShadow: 10,
   p: 3,
   borderRadius: 4,
   maxHeight: "100vh", // Set max height to 80% of the viewport height
 };
-
-const AddEmployeeModal = ({ Openmodel, setOpenmodel }) => {
+const Employeedetailmodal = ({ Openmodel, setOpenmodel }) => {
   const handlecloseButton = useCallback(() => {
     setOpenmodel(false);
   }, [setOpenmodel]);
 
-const handlesaveButton =useCallback(()=>{
-  setOpenmodel(false);
-}, [setOpenmodel]);
+  const handlesaveButton = useCallback(() => {
+    setOpenmodel(false);
+  }, [setOpenmodel]);
 
-
-const [designation, setDesignation] = React.useState("default");
+  const [designation, setDesignation] = React.useState("default");
 
   const handleChange = (event) => {
     setDesignation(event.target.value);
@@ -61,7 +59,7 @@ const [designation, setDesignation] = React.useState("default");
   };
 
   return (
-    <Modal open={Openmodel} onClose={setOpenmodel}>
+    <Modal open={Openmodel} onClose={handlecloseButton}>
       <Box sx={style}>
         <Box
           sx={{
@@ -88,17 +86,17 @@ const [designation, setDesignation] = React.useState("default");
               }}
               textAlign={"center"}
             >
-              Add New Employee
+              Employee info
             </Typography>
-            <IconButton onClick={handlecloseButton}>
-              <CloseIcon />
-            </IconButton>
+            <Button startIcon={<BorderColorIcon />} onClick={handlecloseButton}>
+            Edit
+          </Button>
           </Flexcontainer>
         </Box>
         <Box sx={{ overflowY: "auto", maxHeight: "80vh", padding: "0 8px" }}>
           <Grid container spacing={2} justifyContent={"space-between"}>
             <Grid item xs={12}>
-              <Typography > Name</Typography>
+              <Typography>Name</Typography>
 
               <Box
                 sx={{
@@ -110,7 +108,7 @@ const [designation, setDesignation] = React.useState("default");
                 {" "}
                 <TextField
                   id="First_Name"
-                  sx={{ width: "45%" }}
+                  sx={{ mt: 0.5, width: "45%" }}
                   size="small"
                   value={""}
                   placeholder="First Name"
@@ -122,7 +120,7 @@ const [designation, setDesignation] = React.useState("default");
                 />
                 {/* { <Typography color="error">* Required</Typography>} */}
                 <TextField
-                  sx={{  width: "45%" }}
+                  sx={{ mt: 0.5, width: "45%" }}
                   size="small"
                   value={""}
                   placeholder="Last Name"
@@ -135,54 +133,11 @@ const [designation, setDesignation] = React.useState("default");
                 {/* { <Typography color="error">* Required</Typography>} */}
               </Box>
             </Grid>
-            <Grid item xs={12}>
-              <Typography>User Name</Typography>
-              <TextField
-                size="small"
-                fullWidth
-                value={""}
-                placeholder="User_Name@email.com"
-                variant="standard"
-                InputProps={{
-                  sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-                }}
-                // onChange={(e) => setDrugName(e.target.value)}
-              />
-              {/* { <Typography color="error">* Required</Typography>} */}
-            </Grid>
-            <Grid item xs={12}>
-              <Typography>Password</Typography>
-              <TextField
-                size="small"
-                fullWidth
-                value={""}
-                placeholder="12@#WdAa "
-                variant="standard"
-                InputProps={{
-                  sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-                }}
-                // onChange={(e) => setDrugName(e.target.value)}
-              />
-              {/* { <Typography color="error">* Required</Typography>} */}
-            </Grid>
-            <Grid item xs={12}>
-              <Typography>Conform Password</Typography>
-              <TextField
-                size="small"
-                fullWidth
-                value={""}
-                placeholder="12@#WdAa"
-                variant="standard"
-                InputProps={{
-                  sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-                }}
-                // onChange={(e) => setDrugName(e.target.value)}
-              />
-              {/* { <Typography color="error">* Required</Typography>} */}
-            </Grid>
+
             <Grid item xs={5}>
               <Typography>ID </Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -198,6 +153,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={5}>
               <Typography>Phone </Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -213,6 +169,7 @@ const [designation, setDesignation] = React.useState("default");
             <Grid item xs={12}>
               <Typography>Address </Typography>
               <TextField
+                sx={{ mt: 0.5 }}
                 size="small"
                 fullWidth
                 value={""}
@@ -227,25 +184,26 @@ const [designation, setDesignation] = React.useState("default");
             </Grid>
             <Grid item xs={12}>
               <Typography>Designation </Typography>
-              <Box sx={{width:"50%"}}>
-
-              <FormControl sx={{ minWidth: 120 }} fullWidth>
-                <Select
-                  size="small"
-                  value={designation}
-                  variant="standard"
-                  label="Age"
-                  onChange={handleChange}
-                
-                >
-                  <MenuItem value="default" disabled selected>
-                    Select an option
-                  </MenuItem>
-                  <MenuItem value={1}>Admin</MenuItem>
-                  <MenuItem value={2}>Supervisor</MenuItem>
-                  <MenuItem value={3}>Operator</MenuItem>
-                </Select>
-              </FormControl>
+              <Box sx={{ width: "50%" }}>
+                <FormControl sx={{ minWidth: 120 }} fullWidth>
+                  <Select
+                    size="small"
+                    value={designation}
+                    variant="standard"
+                    label="Age"
+                    onChange={handleChange}
+                    sx={{
+                      mt: 0.5,
+                    }}
+                  >
+                    <MenuItem value="default" disabled selected>
+                      Select an option
+                    </MenuItem>
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>Supervisor</MenuItem>
+                    <MenuItem value={3}>Operator</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
             </Grid>
             <Grid item xs={6}>
@@ -294,17 +252,7 @@ const [designation, setDesignation] = React.useState("default");
                   width: "100%",
                 }}
               >
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  style={{ marginRight: "8px" }}
-                  onClick={handlecloseButton}
-                  sx={{
-                    borderRadius: 3,
-                  }}
-                >
-                  cancel
-                </Button>
+               
                 <Button
                   variant="contained"
                   color="primary"
@@ -313,7 +261,7 @@ const [designation, setDesignation] = React.useState("default");
                     borderRadius: 3,
                   }}
                 >
-                  Save
+                  Exit
                 </Button>
               </Box>
             </Grid>
@@ -324,4 +272,4 @@ const [designation, setDesignation] = React.useState("default");
   );
 };
 
-export default AddEmployeeModal;
+export default Employeedetailmodal;

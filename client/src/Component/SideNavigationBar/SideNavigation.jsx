@@ -111,7 +111,7 @@ const SideNavigation = () => {
             justifyContent={"center"}
             key={item.name}
           >
-            <Box onClick={() => handleItemClick(item.name, item.path)}>
+            <Box sx={{mt:2}} onClick={() => handleItemClick(item.name, item.path)}>
               <div
                 style={{
                   display: "flex",
@@ -119,7 +119,7 @@ const SideNavigation = () => {
                   alignItems: "center",
                 }}
               >
-                <img src={item.image} width={60} alt={item.name} />
+                <img src={item.image} width={40} alt={item.name} />
                 <Typography fontWeight={"bold"} fontSize={10}>
                   {item.name}
                 </Typography>
