@@ -248,7 +248,7 @@ const [designation, setDesignation] = React.useState("default");
               </FormControl>
               </Box>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={6} sx={{mb:0}}>
               <FormControl component="fieldset" variant="standard">
                 <FormLabel component="legend">Assign responsibility</FormLabel>
                 <FormGroup>
@@ -292,6 +292,7 @@ const [designation, setDesignation] = React.useState("default");
                   display: "flex",
                   justifyContent: "flex-end",
                   width: "100%",
+                  mb:2,
                 }}
               >
                 <Button

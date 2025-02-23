@@ -4,7 +4,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { styled, useMediaQuery, useTheme, Grid } from "@mui/material";
 import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
-import employee from "../../assests/employeew.svg";
+import employee from "../../assests/employeee.svg";
 import units from "../../assests/units.svg";
 
 // import CalImage from "../../assets/Cal.svg";
@@ -65,7 +65,7 @@ const SideNavigation = () => {
 
   const navigationItems = [
     { image: ResortTrackerLogo },
-    { name: "Employee Info", image: employee, path: "/employeeinfo" },
+    { name: "Employee ", image: employee, path: "/employeeinfo" },
     { name: "Units", image: units, path: "/Units" },
     // { name: "Reports", image: prescription, path: "ReportsV2" },
     // { name: "CPOE", image: CPOEImage, path: "CPOE" },
@@ -89,7 +89,7 @@ const SideNavigation = () => {
         zIndex: 500,
         display: "flex",
         flexDirection: isMobile ? "row" : "column",
-        minHeight: { lg: "100%"},
+        minHeight: { lg: "100%" },
       }}
     >
       <Grid
@@ -111,7 +111,10 @@ const SideNavigation = () => {
             justifyContent={"center"}
             key={item.name}
           >
-            <Box sx={{mt:2}} onClick={() => handleItemClick(item.name, item.path)}>
+            <Box
+              sx={{ mt: 2 }}
+              onClick={() => handleItemClick(item.name, item.path)}
+            >
               <div
                 style={{
                   display: "flex",
@@ -119,7 +122,11 @@ const SideNavigation = () => {
                   alignItems: "center",
                 }}
               >
-                <img src={item.image} width={40} alt={item.name} />
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  width={item.image === ResortTrackerLogo ? 60 : 40}
+                />
                 <Typography fontWeight={"bold"} fontSize={10}>
                   {item.name}
                 </Typography>

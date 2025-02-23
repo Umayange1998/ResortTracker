@@ -1,8 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Box } from "@mui/material";
-import SideNavigation from "../SideNavigationBar/SideNavigation";
+import SideNavigation from  "../SideNavigationBar/SideNavigation";
 
 function Layout() {
+  const location = useLocation();
+  const [urlLocation, setUrlLocation] = useState("");
+
   return (
     <Box
       sx={{
@@ -17,7 +20,6 @@ function Layout() {
         overflow: "hidden",
       }}
     >
-      <SideNavigation />
       <Box
         sx={{
           height: "100vh",
@@ -32,6 +34,8 @@ function Layout() {
       >
         <Outlet />
       </Box>
+      <SideNavigation />
+
     </Box>
   );
 }

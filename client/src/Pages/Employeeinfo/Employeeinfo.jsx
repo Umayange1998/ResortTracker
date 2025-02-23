@@ -39,7 +39,7 @@ function Employeeinfo() {
   const [Openmodel, setOpenmodel] = useState(false);
   const [selectedRowIndex, setSelectedRowIndex] = useState(0);
   const [employeedetailmodelopen, setEmployeedetailmodelopen] = useState(false);
-  const [editemployeemodalopen, setEditemployeemodalopen] = useState(true)
+  const [editemployeemodalopen, setEditemployeemodalopen] = useState(false)
 
   console.log(Search);
 
@@ -236,9 +236,9 @@ function Employeeinfo() {
       {Openmodel && (
         <AddEmployeeModal Openmodel={Openmodel} setOpenmodel={setOpenmodel} />
       )}
-      {employeedetailmodelopen &&(<Employeedetailmodal Openmodel={employeedetailmodelopen} setOpenmodel= {setEmployeedetailmodelopen} />)}
+      {employeedetailmodelopen &&(<Employeedetailmodal Openmodel={employeedetailmodelopen} setOpenmodel= {setEmployeedetailmodelopen} setEditmodelOpen= {setEditemployeemodalopen} />)}
 
-      {editemployeemodalopen && (<Editemployeemodal  Openmodel={editemployeemodalopen} setOpenmodel= {setEditemployeemodalopen}/>)}
+      {editemployeemodalopen && (<Editemployeemodal  Openmodel={editemployeemodalopen} setOpenmodel= {setEditemployeemodalopen} setopenemployeedetail={setEmployeedetailmodelopen} />)}
     </MainDiv>
   );
 }

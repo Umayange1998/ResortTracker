@@ -31,14 +31,16 @@ const style = {
   borderRadius: 4,
   maxHeight: "100vh", // Set max height to 80% of the viewport height
 };
-function Editemployeemodal({ Openmodel, setOpenmodel }) {
-  const handlecloseButton = useCallback(() => {
+function Editemployeemodal({ Openmodel, setOpenmodel, setopenemployeedetail }) {
+  const handleBackButton = useCallback(() => {
     setOpenmodel(false);
-  }, [setOpenmodel]);
+    setopenemployeedetail(true)
+  }, [setOpenmodel, setopenemployeedetail]);
 
   const handlesaveButton = useCallback(() => {
     setOpenmodel(false);
-  }, [setOpenmodel]);
+    setopenemployeedetail(true)
+  }, [setOpenmodel, setopenemployeedetail]);
 
   const [designation, setDesignation] = React.useState("default");
 
@@ -87,9 +89,17 @@ function Editemployeemodal({ Openmodel, setOpenmodel }) {
             >
               Edit Employee
             </Typography>
-            <IconButton onClick={handlecloseButton}>
-              <CloseIcon />
-            </IconButton>
+            <Button
+                  variant="contained"
+                  color="warning"
+                  style={{ marginRight: "8px" }}
+                  onClick={handleBackButton}
+                  sx={{
+                    borderRadius: 3,
+                  }}
+                >
+                  Back
+                </Button>
           </Flexcontainer>
         </Box>
         <Box sx={{ overflowY: "auto", maxHeight: "80vh", padding: "0 8px" }}>
@@ -298,7 +308,7 @@ function Editemployeemodal({ Openmodel, setOpenmodel }) {
                   width: "100%",
                 }}
               >
-                <Button
+                {/* <Button
                   variant="outlined"
                   color="secondary"
                   style={{ marginRight: "8px" }}
@@ -308,7 +318,7 @@ function Editemployeemodal({ Openmodel, setOpenmodel }) {
                   }}
                 >
                   cancel
-                </Button>
+                </Button> */}
                 <Button
                   variant="contained"
                   color="primary"

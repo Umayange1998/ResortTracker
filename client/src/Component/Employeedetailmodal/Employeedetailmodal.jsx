@@ -31,7 +31,7 @@ const style = {
   borderRadius: 4,
   maxHeight: "100vh", // Set max height to 80% of the viewport height
 };
-const Employeedetailmodal = ({ Openmodel, setOpenmodel }) => {
+const Employeedetailmodal = ({ Openmodel, setOpenmodel, setEditmodelOpen }) => {
   const handlecloseButton = useCallback(() => {
     setOpenmodel(false);
   }, [setOpenmodel]);
@@ -39,6 +39,12 @@ const Employeedetailmodal = ({ Openmodel, setOpenmodel }) => {
   const handlesaveButton = useCallback(() => {
     setOpenmodel(false);
   }, [setOpenmodel]);
+
+  const handleEditButton = useCallback(()=>{
+    setOpenmodel(false);
+    setEditmodelOpen(true);
+
+  }, [setOpenmodel, setEditmodelOpen]);
 
   const [designation, setDesignation] = React.useState("default");
 
@@ -88,7 +94,7 @@ const Employeedetailmodal = ({ Openmodel, setOpenmodel }) => {
             >
               Employee info
             </Typography>
-            <Button startIcon={<BorderColorIcon />} onClick={handlecloseButton}>
+            <Button startIcon={<BorderColorIcon />} onClick={handleEditButton}>
             Edit
           </Button>
           </Flexcontainer>
