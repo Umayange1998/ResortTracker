@@ -39,7 +39,7 @@ const HoverBox = styled(Box)(({ theme }) => ({
   left: 0,
   [theme.breakpoints.up("lg")]: {
     position: "absolute",
-    width: 3,
+    width: 4,
     height: 50,
     left: 2,
   },
@@ -53,11 +53,12 @@ const SideNavigation = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("lg"));
   const [urlLocation, setUrlLocation] = useState("");
   useEffect(() => {
+    console.log("useEffect triggered"); 
     // Use location.pathname to get the current URL path
     const currentUrl = location.pathname;
 
     const firstPath = currentUrl.split("/")[1];
-    console.log("path", firstPath);
+    console.log("Current URL location", firstPath);
     setUrlLocation(firstPath);
     // const setUrl = removePart(location)
     // Your existing removePart function can be used here if needed
@@ -65,8 +66,8 @@ const SideNavigation = () => {
 
   const navigationItems = [
     { image: ResortTrackerLogo },
-    { name: "Employee ", image: employee, path: "/employeeinfo" },
-    { name: "Units", image: units, path: "/Units" },
+    { name: "Employee ", image: employee, path: "employeeinfo" },
+    { name: "Units", image: units, path: "Units" },
     // { name: "Reports", image: prescription, path: "ReportsV2" },
     // { name: "CPOE", image: CPOEImage, path: "CPOE" },
     // { name: "Calculators", image: CalImage, path: "Calculators" },
@@ -97,7 +98,9 @@ const SideNavigation = () => {
         color="white"
         sx={{ pt: { xs: 1, lg: 5 }, gap: { xs: 1, lg: 5 } }}
       >
-        {navigationItems.map((item) => (
+        {navigationItems.map((item) => {
+          console.log("Item path:", item.path); // Debugging
+          return (
           <Grid
             item
             xs={2.1}
@@ -134,7 +137,8 @@ const SideNavigation = () => {
               </div>
             </Box>
           </Grid>
-        ))}
+          );
+})}
       </Grid>
     </Box>
   );

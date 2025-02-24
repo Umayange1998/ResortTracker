@@ -10,6 +10,7 @@ import Loading from "./Component/Loading/Loading";
 import componentsOverride from './theme/Overides'
 import typography from "./theme/typography"
 import loadable from "@loadable/component";
+import Layout from "./Component/Layout/layout";
 // const Employeeinfo = loadable(() => import("./Pages/Employeeinfo/Employeeinfo"), {
 //   fallback: <Loading />,
 // });
@@ -25,10 +26,30 @@ const theme = createTheme({
 })
   theme.components = componentsOverride(theme);
 
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: (
+          <Layout/>
+        ),
+        children:[
+          {
+            path:"/employeeinfo",
+            element: <Employeeinfo />,
+          },
+          {
+            path:"/Units",
+            element:<Units />,
+          }
+        ]
+      }
+    ]
+  )
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="App">
+      {/* <div className="App">
         <Router>
           <Routes>
             <Route path="/" element={<Home />} />
@@ -43,7 +64,9 @@ function App() {
 
           </Routes>
         </Router>
-      </div>
+      </div> */}
+      <RouterProvider router={router} />
+
       </ThemeProvider>
   );
 }
