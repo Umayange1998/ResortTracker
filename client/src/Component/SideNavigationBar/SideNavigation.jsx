@@ -116,8 +116,7 @@ const SideNavigation = () => {
           >
             <Box
               sx={{ mt: 2 }}
-              onClick={() => handleItemClick(item.name, item.path)}
-            >
+              onClick={item.image === ResortTrackerLogo ? undefined : () => handleItemClick(item.name, item.path)}            >
               <div
                 style={{
                   display: "flex",
