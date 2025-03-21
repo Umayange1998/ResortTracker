@@ -49,22 +49,23 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* <div className="App">
+      <div className="App">
         <Router>
           <Routes>
-            <Route path="/" element={<Home />} />
+          <Route path="/login" element={<React.Suspense fallback={<Loading />}><Login /></React.Suspense>} />
+
+            {/* <Route path="/" element={<Home />} />
             <Route path="/employeeinfo" element={<React.Suspense fallback={<Loading />}><Employeeinfo /></React.Suspense>} />
             <Route path="/Units" element={<React.Suspense fallback={<Loading />}><Units /></React.Suspense>} />
 
             <Route path="/SideNavigation" element={<SideNavigation />} />
-            <Route path="/login" element={<React.Suspense fallback={<Loading />}><Login /></React.Suspense>} />
-            <Route path="/Addnewemployee" element={<React.Suspense fallback={<Loading />}><Addnewemployee /></React.Suspense>} />
+            <Route path="/Addnewemployee" element={<React.Suspense fallback={<Loading />}><Addnewemployee /></React.Suspense>} /> */}
 
 
 
           </Routes>
         </Router>
-      </div> */}
+      </div>
       <RouterProvider router={router} />
 
       </ThemeProvider>

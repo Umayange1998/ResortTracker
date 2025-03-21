@@ -51,7 +51,6 @@ function Employeeinfo() {
   }, []);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -147,12 +146,12 @@ function Employeeinfo() {
                 </tr>
               </thead>
               <tbody>
-                {data
+                {listofUsers
                   .filter((item) => {
                     return Search.toLowerCase() === ""
                       ? item
-                      : item.first_name.toLowerCase().includes(Search) ||
-                          item.last_name.toLowerCase().includes(Search);
+                      : item.firstName.toLowerCase().includes(Search) ||
+                          item.lastName.toLowerCase().includes(Search);
                   })
                   .map((item, index) => (
                     <tr
@@ -181,7 +180,7 @@ function Employeeinfo() {
 
                         }}
                       >
-                        {item.first_name + " " + item.last_name}
+                        {item.firstName + " " + item.lastName}
                       </td>
                       <td
                         align="right"
