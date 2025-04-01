@@ -8,6 +8,7 @@ import {
   FormLabel,
   Grid,
   IconButton,
+  InputAdornment,
   MenuItem,
   Modal,
   Select,
@@ -15,9 +16,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useCallback } from "react";
-import Flexcontainer from "../../Component/FlexContainer/FlexContainer";
+import React, { useCallback, useState } from "react";
+import Flexcontainer from "../../Components/FlexContainer/FlexContainer";
 import CloseIcon from "@mui/icons-material/Close";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -33,27 +37,95 @@ const style = {
 };
 
 const AddEmployeeModal = ({ Openmodel, setOpenmodel }) => {
-  const handlecloseButton = useCallback(() => {
-    setOpenmodel(false);
-  }, [setOpenmodel]);
+  const [designation, setDesignation] = React.useState("default");
 
-const handlesaveButton =useCallback(()=>{
-  setOpenmodel(false);
-}, [setOpenmodel]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [conformPassword, setConformPassword] = useState("");
+  const [units, setUnits] = useState("");
+  const [phone, setPhone] = useState("");
+  const [nic, setNic] = useState("");
+  const [role, setRole] = useState("");
+  const [address, setAddress] = useState("");
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const handleClickShowConfirmPassword = () =>
+    setShowConfirmPassword((show) => !show);
 
-
-const [designation, setDesignation] = React.useState("default");
-
-  const handleChange = (event) => {
-    setDesignation(event.target.value);
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
+
+  const handleMouseUpPassword = (event) => {
+    event.preventDefault();
+  };
+
   const [state, setState] = React.useState({
     unit01: false,
     unit02: false,
     unit03: false,
   });
 
-  const handleChangeSwitch = (event) => {
+  const handlecloseButton = useCallback(() => {
+    setOpenmodel(false);
+  }, [setOpenmodel]);
+
+  const handlesaveButton = useCallback(() => {
+    const selectedUnits = Object.keys(state).filter((key) => state[key]);
+    if (password !== conformPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    const newUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+      units: JSON.stringify(selectedUnits),
+      phone,
+      nic,
+      role:
+        designation === 1
+          ? "Admin"
+          : designation === 2
+          ? "Supervisor"
+          : "Operator",
+      address,
+    };
+    axios
+      .post("http://localhost:3001/users", newUser)
+      .then((response) => {
+        console.log("User Saved: ", response.data);
+        alert("User added successfully!");
+        setOpenmodel(false); // Close Modal
+        // Optional: Clear form fields here if you want
+      })
+      .catch((error) => {
+        console.error("Error saving user:", error);
+        alert("Failed to save user");
+      });
+  }, [
+    firstName,
+    lastName,
+    email,
+    password,
+    conformPassword,
+    state,
+    phone,
+    nic,
+    designation,
+    address,
+    setOpenmodel,
+  ]);
+
+  const handlerole = (event) => {
+    setDesignation(event.target.value);
+  };
+
+  const handleResponsibilities = (event) => {
     setState({
       ...state,
       [event.target.name]: event.target.checked,
@@ -98,7 +170,7 @@ const [designation, setDesignation] = React.useState("default");
         <Box sx={{ overflowY: "auto", maxHeight: "80vh", padding: "0 8px" }}>
           <Grid container spacing={2} justifyContent={"space-between"}>
             <Grid item xs={12}>
-              <Typography > Name</Typography>
+              <Typography> Name</Typography>
 
               <Box
                 sx={{
@@ -107,30 +179,29 @@ const [designation, setDesignation] = React.useState("default");
                   width: "100%",
                 }}
               >
-                {" "}
                 <TextField
                   id="First_Name"
                   sx={{ width: "45%" }}
                   size="small"
-                  value={""}
+                  value={firstName}
                   placeholder="First Name"
                   variant="standard"
                   InputProps={{
                     sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                   }}
-                  // onChange={(e) => setDrugName(e.target.value)}
+                  onChange={(e) => setFirstName(e.target.value)}
                 />
                 {/* { <Typography color="error">* Required</Typography>} */}
                 <TextField
-                  sx={{  width: "45%" }}
+                  sx={{ width: "45%" }}
                   size="small"
-                  value={""}
+                  value={lastName}
                   placeholder="Last Name"
                   variant="standard"
                   InputProps={{
                     sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                   }}
-                  // onChange={(e) => setDrugName(e.target.value)}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
                 {/* { <Typography color="error">* Required</Typography>} */}
               </Box>
@@ -140,13 +211,13 @@ const [designation, setDesignation] = React.useState("default");
               <TextField
                 size="small"
                 fullWidth
-                value={""}
+                value={email}
                 placeholder="User_Name@email.com"
                 variant="standard"
                 InputProps={{
                   sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                 }}
-                // onChange={(e) => setDrugName(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
               {/* { <Typography color="error">* Required</Typography>} */}
             </Grid>
@@ -155,43 +226,68 @@ const [designation, setDesignation] = React.useState("default");
               <TextField
                 size="small"
                 fullWidth
-                value={""}
+                type={showPassword ? "text" : "password"}
+                value={password}
                 placeholder="12@#WdAa "
                 variant="standard"
                 InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={handleClickShowPassword}
+                        onMouseDown={(e) => e.preventDefault()}
+                        edge="end"
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
                   sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                 }}
-                // onChange={(e) => setDrugName(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
               {/* { <Typography color="error">* Required</Typography>} */}
             </Grid>
             <Grid item xs={12}>
               <Typography>Conform Password</Typography>
               <TextField
-                size="small"
-                fullWidth
-                value={""}
-                placeholder="12@#WdAa"
-                variant="standard"
-                InputProps={{
-                  sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-                }}
-                // onChange={(e) => setDrugName(e.target.value)}
-              />
+  size="small"
+  fullWidth
+  value={conformPassword}
+  placeholder="12@#WdAa"
+  variant="standard"
+  type={showConfirmPassword ? "text" : "password"} 
+  InputProps={{
+    endAdornment: (
+      <InputAdornment position="end">
+        <IconButton
+          onClick={handleClickShowConfirmPassword}
+          onMouseDown={(e) => e.preventDefault()}
+          edge="end"
+        >
+          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+        </IconButton>
+      </InputAdornment>
+    ),
+    sx: { height: "35px", borderRadius: 3 },
+  }}
+  onChange={(e) => setConformPassword(e.target.value)}
+/>
+
               {/* { <Typography color="error">* Required</Typography>} */}
             </Grid>
             <Grid item xs={5}>
-              <Typography>ID </Typography>
+              <Typography>NIC </Typography>
               <TextField
                 size="small"
                 fullWidth
-                value={""}
+                value={nic}
                 placeholder="XXXXXXXXXX "
                 variant="standard"
                 InputProps={{
                   sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                 }}
-                // onChange={(e) => setDrugName(e.target.value)}
+                onChange={(e) => setNic(e.target.value)}
               />
               {/* { <Typography color="error">* Required</Typography>} */}
             </Grid>
@@ -200,13 +296,13 @@ const [designation, setDesignation] = React.useState("default");
               <TextField
                 size="small"
                 fullWidth
-                value={""}
+                value={phone}
                 placeholder="+XX XXXXXXXXX "
                 variant="standard"
                 InputProps={{
                   sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                 }}
-                // onChange={(e) => setDrugName(e.target.value)}
+                onChange={(e) => setPhone(e.target.value)}
               />
               {/* { <Typography color="error">* Required</Typography>} */}
             </Grid>
@@ -215,40 +311,38 @@ const [designation, setDesignation] = React.useState("default");
               <TextField
                 size="small"
                 fullWidth
-                value={""}
+                value={address}
                 placeholder="Lorem ipsum dolor sit amet, consectetur. "
                 variant="standard"
                 InputProps={{
                   sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
                 }}
-                // onChange={(e) => setDrugName(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
               />
               {/* { <Typography color="error">* Required</Typography>} */}
             </Grid>
             <Grid item xs={12}>
               <Typography>Designation </Typography>
-              <Box sx={{width:"50%"}}>
-
-              <FormControl sx={{ minWidth: 120 }} fullWidth>
-                <Select
-                  size="small"
-                  value={designation}
-                  variant="standard"
-                  label="Age"
-                  onChange={handleChange}
-                
-                >
-                  <MenuItem value="default" disabled selected>
-                    Select an option
-                  </MenuItem>
-                  <MenuItem value={1}>Admin</MenuItem>
-                  <MenuItem value={2}>Supervisor</MenuItem>
-                  <MenuItem value={3}>Operator</MenuItem>
-                </Select>
-              </FormControl>
+              <Box sx={{ width: "50%" }}>
+                <FormControl sx={{ minWidth: 120 }} fullWidth>
+                  <Select
+                    size="small"
+                    value={designation}
+                    variant="standard"
+                    label="Age"
+                    onChange={handlerole}
+                  >
+                    <MenuItem value="default" disabled selected>
+                      Select an option
+                    </MenuItem>
+                    <MenuItem value={1}>Admin</MenuItem>
+                    <MenuItem value={2}>Supervisor</MenuItem>
+                    <MenuItem value={3}>Operator</MenuItem>
+                  </Select>
+                </FormControl>
               </Box>
             </Grid>
-            <Grid item xs={6} sx={{mb:0}}>
+            <Grid item xs={6} sx={{ mb: 0 }}>
               <FormControl component="fieldset" variant="standard">
                 <FormLabel component="legend">Assign responsibility</FormLabel>
                 <FormGroup>
@@ -256,7 +350,7 @@ const [designation, setDesignation] = React.useState("default");
                     control={
                       <Switch
                         checked={state.unit01}
-                        onChange={handleChangeSwitch}
+                        onChange={handleResponsibilities}
                         name="unit01"
                       />
                     }
@@ -266,7 +360,7 @@ const [designation, setDesignation] = React.useState("default");
                     control={
                       <Switch
                         checked={state.unit02}
-                        onChange={handleChangeSwitch}
+                        onChange={handleResponsibilities}
                         name="unit02"
                       />
                     }
@@ -276,7 +370,7 @@ const [designation, setDesignation] = React.useState("default");
                     control={
                       <Switch
                         checked={state.unit03}
-                        onChange={handleChangeSwitch}
+                        onChange={handleResponsibilities}
                         name="unit03"
                       />
                     }
@@ -292,7 +386,7 @@ const [designation, setDesignation] = React.useState("default");
                   display: "flex",
                   justifyContent: "flex-end",
                   width: "100%",
-                  mb:2,
+                  mb: 2,
                 }}
               >
                 <Button

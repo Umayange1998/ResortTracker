@@ -5,12 +5,12 @@ import store from "./app/store";
 import Home from "./Pages/home/home"
 import palette from "./theme/palette";
 import './App.css'
-import SideNavigation from "./Component/SideNavigationBar/SideNavigation"
-import Loading from "./Component/Loading/Loading";
+import SideNavigation from "./Components/SideNavigationBar/SideNavigation"
+import Loading from "./Components/Loading/Loading";
 import componentsOverride from './theme/Overides'
 import typography from "./theme/typography"
 import loadable from "@loadable/component";
-import Layout from "./Component/Layout/layout";
+import Layout from "./Components/Layout/layout";
 // const Employeeinfo = loadable(() => import("./Pages/Employeeinfo/Employeeinfo"), {
 //   fallback: <Loading />,
 // });

@@ -1,290 +1,323 @@
 import {
-    Box,
-    Button,
-    FormControl,
-    FormControlLabel,
-    FormGroup,
-    FormHelperText,
-    FormLabel,
-    Grid,
-    IconButton,
-    MenuItem,
-    Modal,
-    Select,
-    Switch,
-    TextField,
-    Typography,
-  } from "@mui/material";
-  import React, { useCallback } from "react";
-  import Flexcontainer from "../../Component/FlexContainer/FlexContainer";
-  import CloseIcon from "@mui/icons-material/Close";
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  FormLabel,
+  Grid,
+  IconButton,
+  MenuItem,
+  Modal,
+  Select,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React, { useCallback, useState } from "react";
+import Flexcontainer from "../../Components/FlexContainer/FlexContainer";
+import CloseIcon from "@mui/icons-material/Close";
 
-  const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    bgcolor: "background.paper",
-    // boxShadow: 10,
-    p: 3,
-    borderRadius: 4,
-    maxHeight: "80vh", // Set max height to 80% of the viewport height
-    overflowY: "auto",
-  };
-  
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  bgcolor: "background.paper",
+  // boxShadow: 10,
+  p: 3,
+  borderRadius: 4,
+  maxHeight: "80vh", // Set max height to 80% of the viewport height
+  overflowY: "auto",
+};
+
 function Addnewemployee() {
-    const [designation, setDesignation] = React.useState("default");
-    
-      const handleChange = (event) => {
-        setDesignation(event.target.value);
-      };
-      const [state, setState] = React.useState({
-        gilad: true,
-        jason: false,
-        antoine: true,
-      });
-    
-      const handleChangeSwitch = (event) => {
-        setState({
-          ...state,
-          [event.target.name]: event.target.checked,
-        });
-      };
-    
-    
+  const [designation, setDesignation] = React.useState("default");
+
+  const [firtsName, setFirtsName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [conformPassword, setConformPassword] = useState("");
+  const [units, setUnits] = useState("");
+  const [phone, setPhone] = useState("");
+  const [nic, setNic] = useState("");
+  const [role, setRole] = useState("");
+  const [address, setAddress] = useState("");
+
+
+  const handleChange = (event) => {
+    setDesignation(event.target.value);
+  };
+  const [state, setState] = React.useState({
+    gilad: true,
+    jason: false,
+    antoine: true,
+  });
+
+  const handleChangeSwitch = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
+    });
+  };
+
   return (
     <Box sx={style}>
-        <Flexcontainer
+      <Flexcontainer
+        sx={{
+          justifyContent: "space-between",
+          mb: 1,
+        }}
+      >
+        <Typography
+          fontWeight={"bold"}
           sx={{
-            justifyContent: "space-between",
-            mb: 1,
+            fontSize: {
+              xs: "18px",
+            },
           }}
+          textAlign={"center"}
         >
-          <Typography
-            fontWeight={"bold"}
-            sx={{
-              fontSize: {
-                xs: "18px",
-              },
-            }}
-            textAlign={"center"}
-          >
-            Add New Employee
-          </Typography>
-          {/* <IconButton onClick={handlecloseButton}>
+          Add New Employee
+        </Typography>
+        {/* <IconButton onClick={handlecloseButton}>
             <CloseIcon />
           </IconButton> */}
-        </Flexcontainer>
-        <Grid container spacing={2} justifyContent={"space-between"}>
-          <Grid item xs={12}>
-            <Typography>Name</Typography>
+      </Flexcontainer>
+      <Grid container spacing={2} justifyContent={"space-between"}>
+        <Grid item xs={12}>
+          <Typography>Name</Typography>
 
-            <Box
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
+            {" "}
+            <TextField
+              id="First_Name"
+              sx={{ mt: 0.5, width: "45%" }}
+              size="small"
+              value={""}
+              placeholder="First Name"
+              variant="standard"
+              InputProps={{
+                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+              }}
+              onChange={(e) => setFirtsName(e.target.value)}
+            />
+            {/* { <Typography color="error">* Required</Typography>} */}
+            <TextField
+              sx={{ mt: 0.5, width: "45%" }}
+              size="small"
+              value={""}
+              placeholder="Last Name"
+              variant="standard"
+              InputProps={{
+                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+              }}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            {/* { <Typography color="error">* Required</Typography>} */}
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>User Name</Typography>
+          <TextField
+            sx={{ mt: 0.5 }}
+            size="small"
+            fullWidth
+            value={""}
+            placeholder="User_Name@email.com"
+            variant="standard"
+            InputProps={{
+              sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+            }}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {/* { <Typography color="error">* Required</Typography>} */}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>Password</Typography>
+          <TextField
+            sx={{ mt: 0.5 }}
+            size="small"
+            fullWidth
+            value={""}
+            placeholder="12@#WdAa "
+            variant="standard"
+            InputProps={{
+              sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+            }}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {/* { <Typography color="error">* Required</Typography>} */}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>Conform Password</Typography>
+          <TextField
+            sx={{ mt: 0.5 }}
+            size="small"
+            fullWidth
+            value={""}
+            placeholder="12@#WdAa"
+            variant="standard"
+            InputProps={{
+              sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+            }}
+            onChange={(e) => setConformPassword(e.target.value)}
+          />
+          {/* { <Typography color="error">* Required</Typography>} */}
+        </Grid>
+        <Grid item xs={5}>
+          <Typography>NIC </Typography>
+          <TextField
+            sx={{ mt: 0.5 }}
+            size="small"
+            fullWidth
+            value={""}
+            placeholder="XXXXXXXXXX "
+            variant="standard"
+            InputProps={{
+              sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+            }}
+            onChange={(e) => setNic(e.target.value)}
+          />
+          {/* { <Typography color="error">* Required</Typography>} */}
+        </Grid>
+        <Grid item xs={5}>
+          <Typography>Phone </Typography>
+          <TextField
+            sx={{ mt: 0.5 }}
+            size="small"
+            fullWidth
+            value={""}
+            placeholder="+XX XXXXXXXXX "
+            variant="standard"
+            InputProps={{
+              sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+            }}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          {/* { <Typography color="error">* Required</Typography>} */}
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>Address </Typography>
+          <TextField
+            sx={{ mt: 0.5 }}
+            size="small"
+            fullWidth
+            value={""}
+            placeholder="Lorem ipsum dolor sit amet, consectetur. "
+            variant="standard"
+            InputProps={{
+              sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
+            }}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          {/* { <Typography color="error">* Required</Typography>} */}
+        </Grid>
+        <Grid item xs={6}>
+          <Typography>Designation </Typography>
+
+          <FormControl sx={{ minWidth: 120 }} fullWidth>
+            <Select
+              size="small"
+              value={designation}
+              variant="standard"
+              label="Age"
+              onChange={handleChange}
               sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                width: "100%",
+                mt: 0.5,
               }}
             >
-              {" "}
-              <TextField
-                id="First_Name"
-                sx={{ mt: 0.5, width: "45%" }}
-                size="small"
-                value={""}
-                placeholder="First Name"
-                variant="standard"
-                InputProps={{
-                  sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-                }}
-                // onChange={(e) => setDrugName(e.target.value)}
-              />
-              {/* { <Typography color="error">* Required</Typography>} */}
-              <TextField
-                sx={{ mt: 0.5, width: "45%" }}
-                size="small"
-                value={""}
-                placeholder="Last Name"
-                variant="standard"
-                InputProps={{
-                  sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-                }}
-                // onChange={(e) => setDrugName(e.target.value)}
-              />
-              {/* { <Typography color="error">* Required</Typography>} */}
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>User Name</Typography>
-            <TextField
-              sx={{ mt: 0.5 }}
-              size="small"
-              fullWidth
-              value={""}
-              placeholder="User_Name@email.com"
-              variant="standard"
-              InputProps={{
-                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-              }}
-              // onChange={(e) => setDrugName(e.target.value)}
-            />
-            {/* { <Typography color="error">* Required</Typography>} */}
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>Password</Typography>
-            <TextField
-              sx={{ mt: 0.5 }}
-              size="small"
-              fullWidth
-              value={""}
-              placeholder="12@#WdAa "
-              variant="standard"
-              InputProps={{
-                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-              }}
-              // onChange={(e) => setDrugName(e.target.value)}
-            />
-            {/* { <Typography color="error">* Required</Typography>} */}
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>Conform Password</Typography>
-            <TextField
-              sx={{ mt: 0.5 }}
-              size="small"
-              fullWidth
-              value={""}
-              placeholder="12@#WdAa"
-              variant="standard"
-              InputProps={{
-                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-              }}
-              // onChange={(e) => setDrugName(e.target.value)}
-            />
-            {/* { <Typography color="error">* Required</Typography>} */}
-          </Grid>
-          <Grid item xs={5}>
-            <Typography>ID </Typography>
-            <TextField
-              sx={{ mt: 0.5 }}
-              size="small"
-              fullWidth
-              value={""}
-              placeholder="XXXXXXXXXX "
-              variant="standard"
-              InputProps={{
-                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-              }}
-              // onChange={(e) => setDrugName(e.target.value)}
-            />
-            {/* { <Typography color="error">* Required</Typography>} */}
-          </Grid>
-          <Grid item xs={5}>
-            <Typography>Phone </Typography>
-            <TextField
-              sx={{ mt: 0.5 }}
-              size="small"
-              fullWidth
-              value={""}
-              placeholder="+XX XXXXXXXXX "
-              variant="standard"
-              InputProps={{
-                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-              }}
-              // onChange={(e) => setDrugName(e.target.value)}
-            />
-            {/* { <Typography color="error">* Required</Typography>} */}
-          </Grid>
-          <Grid item xs={12}>
-            <Typography>Address </Typography>
-            <TextField
-              sx={{ mt: 0.5 }}
-              size="small"
-              fullWidth
-              value={""}
-              placeholder="Lorem ipsum dolor sit amet, consectetur. "
-              variant="standard"
-              InputProps={{
-                sx: { height: "35px", borderRadius: 3 }, // Controls the height of the input field
-              }}
-              // onChange={(e) => setDrugName(e.target.value)}
-            />
-            {/* { <Typography color="error">* Required</Typography>} */}
-          </Grid>
-          <Grid item xs={6}>
-            <Typography>Designation </Typography>
-
-            <FormControl sx={{ minWidth: 120 }} fullWidth>
-              <Select
-                size="small"
-                value={designation}
-                variant="standard"
-                          label="Age"
-                onChange={handleChange}
-                sx={{
-                  mt: 0.5,
-                }}
-              >
-                <MenuItem value="default" disabled selected>
-                  Select an option
-                </MenuItem>
-                <MenuItem value={1}>Admin</MenuItem>
-                <MenuItem value={2}>Supervisor</MenuItem>
-                <MenuItem value={3}>Operator</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={6}> <FormControl component="fieldset" variant="standard">
-      <FormLabel component="legend">Assign responsibility</FormLabel>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch checked={state.gilad} onChange={handleChangeSwitch} name="gilad" />
-          }
-          label="Gilad Gray"
-        />
-        <FormControlLabel
-          control={
-            <Switch checked={state.jason} onChange={handleChangeSwitch} name="jason" />
-          }
-          label="Jason Killian"
-        />
-        <FormControlLabel
-          control={
-            <Switch checked={state.antoine} onChange={handleChangeSwitch} name="antoine" />
-          }
-          label="Antoine Llorca"
-        />
-      </FormGroup>
-      <FormHelperText>Be careful</FormHelperText>
-    </FormControl></Grid>
-          <Grid item xs={12}>
-            <Box></Box>
-            <Box   sx={{
-                display: "flex",
-                justifyContent:"flex-end",
-                width: "100%",
-              }}>
-                <Button
-                variant="outlined"
-                color="secondary"
-                style={{ marginRight: "8px" }}
-                onClick={''}
-                sx={{
-                  borderRadius: 1,
-                }}>cancel</Button>
-                <Button
-                variant="contained"
-                color="primary"
-                onClick={""}
-                sx={{
-                  borderRadius: 1,
-                }}>Save</Button>
-              </Box>
-          </Grid>
-
+              <MenuItem value="default" disabled selected>
+                Select an option
+              </MenuItem>
+              <MenuItem value={1}>Admin</MenuItem>
+              <MenuItem value={2}>Supervisor</MenuItem>
+              <MenuItem value={3}>Operator</MenuItem>
+            </Select>
+          </FormControl>
         </Grid>
-      </Box>
-  )
+        <Grid item xs={6}>
+          {" "}
+          <FormControl component="fieldset" variant="standard">
+            <FormLabel component="legend">Assign responsibility</FormLabel>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.gilad}
+                    onChange={handleChangeSwitch}
+                    name="gilad"
+                  />
+                }
+                label="Gilad Gray"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.jason}
+                    onChange={handleChangeSwitch}
+                    name="jason"
+                  />
+                }
+                label="Jason Killian"
+              />
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={state.antoine}
+                    onChange={handleChangeSwitch}
+                    name="antoine"
+                  />
+                }
+                label="Antoine Llorca"
+              />
+            </FormGroup>
+            <FormHelperText>Be careful</FormHelperText>
+          </FormControl>
+        </Grid>
+        <Grid item xs={12}>
+          <Box></Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              width: "100%",
+            }}
+          >
+            <Button
+              variant="outlined"
+              color="secondary"
+              style={{ marginRight: "8px" }}
+              onClick={""}
+              sx={{
+                borderRadius: 1,
+              }}
+            >
+              cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={""}
+              sx={{
+                borderRadius: 1,
+              }}
+            >
+              Save
+            </Button>
+          </Box>
+        </Grid>
+      </Grid>
+    </Box>
+  );
 }
 
-export default Addnewemployee
+export default Addnewemployee;

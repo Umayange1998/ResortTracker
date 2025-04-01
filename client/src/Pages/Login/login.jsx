@@ -13,7 +13,7 @@ import { setIsAuth } from "../../reducers/isAuthSlise";
 import { useDispatch } from "react-redux";
 import BG from "../../assests/BGnew.png";
 import Logopng from "../../assests/logo-no-background.png";
-import FlexContainer from "../../Component/FlexContainer/FlexContainer";
+import FlexContainer from "../../Components/FlexContainer/FlexContainer";
 // import { Input as BaseInput } from '@mui/base/Input';
 
 const MainDiv = styled("div")({

@@ -6,9 +6,9 @@ import "./table.css";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import { data } from "./Data";
-import AddEmployeeModal from "../../Component/AddEmployeeModal/AddEmployeeModal";
-import Employeedetailmodal from "../../Component/Employeedetailmodal/Employeedetailmodal"
-import Editemployeemodal from "../../Component/Modal/EditEmplyeeModel/Editemployeemodal"
+import AddEmployeeModal from "../../Components/AddEmployeeModal/AddEmployeeModal";
+import Employeedetailmodal from "../../Components/Employeedetailmodal/Employeedetailmodal"
+import Editemployeemodal from "../../Components/Modal/EditEmplyeeModel/Editemployeemodal"
 import {
   Box,
   Grid,
@@ -48,7 +48,7 @@ function Employeeinfo() {
       setlistofUsers(response.data);
       console.log(response);
     });
-  }, []);
+  }, [setlistofUsers]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event, newPage) => {
@@ -140,7 +140,7 @@ function Employeeinfo() {
             <table sx={{ minWidth: 650 }} aria-label="simple table">
               <thead>
                 <tr>
-                  <th>NO</th>
+                  <th>Employee Id</th>
                   <th align="right">Name</th>
                   <th align="right">User Name</th>
                 </tr>
@@ -169,7 +169,7 @@ function Employeeinfo() {
                           
                         }}
                       >
-                        {item.id}
+                        {item.empID}
                       </td>
                       <td
                         align="right"
