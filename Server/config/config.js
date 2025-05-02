@@ -1,20 +1,22 @@
-{
+
+require('dotenv').config(); 
+module.exports ={
   "development": {
-    "username": "root",
-    "password": "0712482037",
-    "database": "resorttrackerdb",
+    "username": process.env.DB_USERNAME,
+    "password": process.env.DB_PASSWORD,
+    "database": process.env.DATABASE,
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
+    "username": process.env.DB_USERNAME,
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
+    "username": process.env.DB_USERNAME,
     "password": null,
     "database": "database_production",
     "host": "127.0.0.1",
